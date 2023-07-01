@@ -29,7 +29,7 @@ function initChat() {
 		if (!inputText.value) return;
 
 		websocket.send(inputText.value);
-		chatWindow.innerHTML += `<div class='message message-sent'>${inputText.value}</div>`;
+		chatWindow.innerHTML += `<div class='message message-sent border0-5'>${inputText.value}</div>`;
 		chatWindow.scrollTop = chatWindow.scrollHeight;
 		inputText.value = "";
 	}
@@ -39,7 +39,7 @@ function initChat() {
 
 		if (event.data.match(regExp)) return;
 
-		chatWindow.innerHTML += `<div class='message message-received'>${event.data}</div>`;
+		chatWindow.innerHTML += `<div class='message message-received border0-5'>${event.data}</div>`;
 		chatWindow.scrollTop = chatWindow.scrollHeight;
 	}
 
@@ -47,9 +47,10 @@ function initChat() {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.getCurrentPosition((position) => {
 				const { coords } = position;
+                console.log(coords);
 				let coordinates = `${coords.latitude} + ${coords.longitude}`;
 				websocket.send(coordinates);
-				chatWindow.innerHTML += `<div class='message message-sent'><a href="https://www.openstreetmap.org/#map=12/${coords.latitude}/${coords.longitude}">My location</a></div>`;
+				chatWindow.innerHTML += `<div class='message message-sent border0-5'><a href="https://www.openstreetmap.org/#map=12/${coords.latitude}/${coords.longitude}">My location</a></div>`;
 				chatWindow.scrollTop = chatWindow.scrollHeight;
 			});
 		} else {
